@@ -11,7 +11,7 @@ const defaultPreLoadable: EnhancedPreLoadable = {
 
 let i = 0;
 
-const register = (component: PreLoadable & Partial<EnhancedPreLoadable>) => {
+const register = <T = any>(component: PreLoadable & Partial<EnhancedPreLoadable>) => {
     const enhancedComponent: Component = {
         name: `Component${i++}`,
         ...defaultPreLoadable,
@@ -25,7 +25,7 @@ const register = (component: PreLoadable & Partial<EnhancedPreLoadable>) => {
 
     mapLoadable[name] = enhancedComponent;
 
-    return optimized(name);
+    return optimized(name) as T;
 };
 
 const component = (name: string) => getComponent(name);
